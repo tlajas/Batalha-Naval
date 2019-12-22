@@ -1,4 +1,4 @@
-navios_disponiveis_1 = {
+navios_disponiveis_j1 = {
     'tipos_de_navios': [
           {
              'nome':'Lancha',
@@ -33,7 +33,7 @@ navios_disponiveis_1 = {
       ]
 } 
 
-navios_disponiveis_2 = {
+navios_disponiveis_j2 = {
     'tipos_de_navios': [
           {
              'nome':'Lancha',
