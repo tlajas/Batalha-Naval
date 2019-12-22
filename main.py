@@ -41,7 +41,26 @@ def comandosRJ(comandos, jogo):
         print('Jogador registado com sucesso')
     
 def comandosEJ(comandos, jogo):
-    
+
+def comandosLJ(comandos, jogo):
+
+def comandosIJ(comandos, jogo):
+
+def comandosIC(comandos, jogo):
+
+def comandosD(comandos, jogo):
+
+def comandosCN(comandos, jogo):
+
+def comandosRN(comandos, jogo):
+
+def comandosT(comandos, jogo):
+
+def comandosV(comandos, jogo):
+
+def comandosG(comandos, jogo):
+
+def comandosL(comandos, jogo):
 
 
 
