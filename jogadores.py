@@ -33,6 +33,6 @@ def remover_jogadores(jogadores, nome):
             jogadores['jogadores'].remove(jogador2)
 
 def listar_jogador(jogadores, nome):
-    jogadores['jogadores'].sort())
+    jogadores['jogadores'].sort()
     print (jogadores['jogadores'])
     
