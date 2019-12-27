@@ -15,11 +15,11 @@ def tabuleiro_navios_j1_colunas():
 tabuleiro_navios_j1_colunas()
 
 
-def tabuleiro_navios_j2():
+def tabuleiro_navios_j2_colunas():
     pass
 
-def tabuleiro_ataques_j1():
+def tabuleiro_ataques_j1_colunas():
     pass
 
-def tabuleiro_ataques_j2():
+def tabuleiro_ataques_j2_colunas():
     pass
