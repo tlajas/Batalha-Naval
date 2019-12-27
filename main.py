@@ -1,3 +1,5 @@
+import jogadores as jogo
+
 def main():
     while True:
         line = input()
