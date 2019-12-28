@@ -1,7 +1,7 @@
-import jogadores as j
+import jogadores as jogador
 
 def main():
-    jogo = j.jogadores()       
+    jogo = jogador.jogadores()       
     while True:
         line = input()
         if not line:
@@ -37,17 +37,18 @@ def main():
 
 def comandosRJ(comandos, jogo):
     nome_jogador = comandos[1]
-    if jogo.tem_jogador(jogo, nome_jogador):
+    if jogador.tem_jogador(jogo, nome_jogador):
         print('Jogador existente')
     else:
-        jogo.adicionar_jogador(jogo, nome_jogador)
+        jogador.adicionar_jogadores(jogo, nome_jogador)
         print('Jogador registado com sucesso')
     
 def comandosEJ(comandos, jogo):
-    if jogo.jogadores['jogadores'] == []:
+    nome_jogador = comandos[1]
+    if nome_jogador not in jogo['jogadores']['nome']:
         print ('Jogador não existente')
     else:
-        jogo.remover_jogadores
+        jogador.remover_jogadores(jogo, nome_jogador)
         print ('Jogador removido com sucesso')
 
 def comandosLJ(comandos, jogo):
