@@ -1,6 +1,7 @@
-import jogadores as jogo
+import jogadores as j
 
 def main():
+    jogo = j.jogadores()       
     while True:
         line = input()
         if not line:
@@ -35,11 +36,11 @@ def main():
             print('Instrução inválida')
 
 def comandosRJ(comandos, jogo):
-    jogador_nome = comandos[1]
-    if jogo.tem_jogador(jogadores, nome):
+    nome_jogador = comandos[1]
+    if jogo.tem_jogador(jogo, nome_jogador):
         print('Jogador existente')
     else:
-        jogo.adicionar_jogador(jogadores, nome)
+        jogo.adicionar_jogador(jogo, nome_jogador)
         print('Jogador registado com sucesso')
     
 def comandosEJ(comandos, jogo):
