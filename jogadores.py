@@ -1,30 +1,31 @@
 def jogadores():
     return {
-        'jogadores': []
+        'jogador_1': [],
+        'jogador_2': []
     } 
 
-def adicionar_jogadores(jogadores, nome):
+def adicionar_jogadores(jogo, nome):
     jogador_1 = {
         'nome' : nome
     }
-    jogadores['jogadores'].append(jogador_1)
+    jogo['jogador_1'].append(jogador_1)
 
     jogador_2 = {
         'nome' : nome
     }
-    jogadores['jogadores'].append(jogador_2)
+    jogo['jogador_2'].append(jogador_2)
 
-def tem_jogador(jogadores, nome):
-    for jogador in jogadores['jogadores']:
+def tem_jogador(jogo, nome):
+    for jogador_1 in jogo['jogador_1']:
         if jogador_1['nome'] == nome:
             return True
     return False
-    for jogador in jogadores['jogadores']:
+    for jogador_2 in jogo['jogador_2']:
         if jogador_2['nome'] == nome:
             return True
     return False
 
-def remover_jogadores(jogadores, nome):
+def remover_jogadores(jogo, nome):
     for jogador in jogadores['jogadores']:
         if jogador_1['nome'] == nome:
             jogadores['jogadores'].remove(jogador1)
@@ -32,7 +33,7 @@ def remover_jogadores(jogadores, nome):
         if jogador_2['nome'] == nome:
             jogadores['jogadores'].remove(jogador2)
 
-def listar_jogador(jogadores, nome):
+def listar_jogador(jogo, nome):
     jogadores['jogadores'].sort()
     print (jogadores['jogadores'])
     
