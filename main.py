@@ -45,14 +45,14 @@ def comandosRJ(comandos, jogo):
     
 def comandosEJ(comandos, jogo):
     nome_jogador = comandos[1]
-    if nome_jogador not in jogo['jogadores']['nome']:
+    if jogador.esta_na_lista(jogo, nome_jogador):
         print ('Jogador não existente')
     else:
         jogador.remover_jogadores(jogo, nome_jogador)
         print ('Jogador removido com sucesso')
 
 def comandosLJ(comandos, jogo):
-    pass
+    
 def comandosIJ(comandos, jogo):
     pass
 def comandosIC(comandos, jogo):
