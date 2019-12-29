@@ -3,6 +3,7 @@ def jogadores():
         'jogadores': []
     } 
 
+
 def adicionar_jogadores(jogo, nome):
     jogadores = {
         'nome' : nome
@@ -18,9 +19,19 @@ def tem_jogador(jogo, nome):
    
 
 def remover_jogadores(jogo, nome):
+    pass
+
+
+def listar_jogadores(jogo):
+    nomes = []
     for jogador in jogo['jogadores']:
-        jogador['nome'].remove(nome)
-                
+        nomes.append(jogador['nome'])
+        nomes.sort()
+    if nomes == []:
+        print('Jogador Inexistente')
+    else:
+        print(', '.join(nomes))
+
 
 def esta_na_lista(jogo, nome):
     for jogador in jogo['jogadores']:
@@ -29,7 +40,6 @@ def esta_na_lista(jogo, nome):
     return False
       
 
-def listar_jogador(jogo):
-    jogo['jogadores'].sort()
-    print (jogo['jogadores'])
+
+    
     
