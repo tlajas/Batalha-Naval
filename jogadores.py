@@ -19,7 +19,9 @@ def tem_jogador(jogo, nome):
    
 
 def remover_jogadores(jogo, nome):
-    pass
+    for jogador in jogo['jogadores']:
+        if jogador['nome'] == nome:
+            del jogador['nome']
 
 
 def listar_jogadores(jogo):
@@ -28,16 +30,16 @@ def listar_jogadores(jogo):
         nomes.append(jogador['nome'])
         nomes.sort()
     if nomes == []:
-        print('Jogador Inexistente')
+        print('Não existem jogadores registados.')
     else:
         print(', '.join(nomes))
 
 
 def esta_na_lista(jogo, nome):
     for jogador in jogo['jogadores']:
-        if nome not in jogador['nome']:
-            return True
-    return False
+        if jogador.get('nome') == nome:
+            return False
+    return True
       
 
 
