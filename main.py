@@ -13,7 +13,7 @@ def main():
         elif comandos[0] == 'EJ':
             comandosEJ(comandos, jogo)
         elif comandos[0] == 'LJ':
-            comandosLJ(comandos, jogo)
+            comandosLJ(jogo)
         elif comandos[0] == 'IJ':
             comandosIJ(comandos, jogo)
         elif comandos[0] == 'IC':
@@ -38,7 +38,7 @@ def main():
 def comandosRJ(comandos, jogo):
     nome_jogador = comandos[1]
     if jogador.tem_jogador(jogo, nome_jogador):
-        print('Jogador existente')
+        print('Jogador existente.')
     else:
         jogador.adicionar_jogadores(jogo, nome_jogador)
         print('Jogador registado com sucesso')
@@ -51,7 +51,9 @@ def comandosEJ(comandos, jogo):
         jogador.remover_jogadores(jogo, nome_jogador)
         print ('Jogador removido com sucesso')
 
-def comandosLJ(comandos, jogo):
+def comandosLJ(jogo):
+    jogador.listar_jogadores(jogo)
+
     
 def comandosIJ(comandos, jogo):
     pass
