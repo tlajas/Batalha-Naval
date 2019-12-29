@@ -41,15 +41,15 @@ def comandosRJ(comandos, jogo):
         print('Jogador existente.')
     else:
         jogador.adicionar_jogadores(jogo, nome_jogador)
-        print('Jogador registado com sucesso')
+        print('Jogador registado com sucesso.')
     
 def comandosEJ(comandos, jogo):
     nome_jogador = comandos[1]
     if jogador.esta_na_lista(jogo, nome_jogador):
-        print ('Jogador não existente')
+        print ('Jogador não existente.')
     else:
         jogador.remover_jogadores(jogo, nome_jogador)
-        print ('Jogador removido com sucesso')
+        print ('Jogador removido com sucesso.')
 
 def comandosLJ(jogo):
     jogador.listar_jogadores(jogo)
