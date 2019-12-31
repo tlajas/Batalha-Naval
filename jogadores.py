@@ -5,40 +5,46 @@ def jogadores():
 
 
 def adicionar_jogadores(jogo, nome):
-    jogadores = {
-        'nome' : nome
+    jogador = {
+        nome : {
+                'jogos': 0,
+                'vitorias': 0
+        }
     }
-    jogo['jogadores'].append(jogadores)
+    jogo['jogadores'].append(jogador)
 
 
 def tem_jogador(jogo, nome):
     for jogador in jogo['jogadores']:
-        if jogador['nome'] == nome:
+        if nome in jogador:
             return True
     return False
    
 
 def remover_jogadores(jogo, nome):
     for jogador in jogo['jogadores']:
-        if jogador['nome'] == nome:
-            del jogador['nome']
+        for chave in jogador:
+            if chave == nome:
+                jogador.clear()
+                break
 
 
 def listar_jogadores(jogo):
-    nomes = []
-    for jogador in jogo['jogadores']:
-        nomes.append(jogador['nome'])
-        nomes.sort()
-    if nomes == []:
+    if jogo['jogadores'] == []:
         print('Não existem jogadores registados.')
     else:
-        print(', '.join(nomes))
+        for jogador in jogo['jogadores']:
+            for chave in sorted(jogador.keys()):
+                nomes = []
+                nomes.append(chave)            
+            print(nomes)
 
 
 def esta_na_lista(jogo, nome):
     for jogador in jogo['jogadores']:
-        if jogador.get('nome') == nome:
-            return False
+        for chave in jogador:
+            if chave == nome:
+                return False
     return True
       
 
