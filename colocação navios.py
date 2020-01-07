@@ -2,6 +2,7 @@ import tabuleiro as tab
 import navios
 import jogadores
 
+
 def posicao
 def colocar_navios(jogador, tipo, linha, coluna, orientacao):
     if jogador == jogador_1:
@@ -19,8 +20,8 @@ def colocar_navios(jogador, tipo, linha, coluna, orientacao):
                 print('Não lhe restam mais navios desse tipo para colocar.')
 
 
-#def remover_navio(jogador, tipo, linha, coluna, orientacao):
-#    if 
+def coordenadas():
+    pass
 
 
 
