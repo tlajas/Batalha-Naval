@@ -33,11 +33,12 @@ def listar_jogadores(jogo):
     if jogo['jogadores'] == []:
         print('Não existem jogadores registados.')
     else:
+        nomes = []
         for jogador in jogo['jogadores']:
-            for chave in sorted(jogador.keys()):
-                nomes = []
-                nomes.append(chave)            
-            print(nomes)
+            for chave in jogador.keys():
+                nomes.append(chave) 
+        nomes.sort()           
+        print("\n".join(nomes))
 
 
 def esta_na_lista(jogo, nome):
@@ -47,6 +48,18 @@ def esta_na_lista(jogo, nome):
                 return False
     return True
       
+def iniciar_jogo(jogo, nome1, nome2):
+    nomes = []
+    for jogador in jogo['jogadores']:
+        if nome1 in jogador:
+            nomes.append(nome1)
+        if nome2 in jogador:
+            nomes.append(nome2)
+    nomes.sort()
+    print(nomes)
+    return nomes
+
+
 
 
     
