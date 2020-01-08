@@ -7,13 +7,9 @@ import main
 def posicao():
     pass
 
-def colocar_navios():
-    users = []
-    users = main.obter_jogadores()
-    jogador_1 = users[0]
-    jogador_2 = users[1]
-    print(jogador_1)
-    print(jogador_2)
+def colocar_navios(jogadores):
+    users = jogadores
+    print(users)
     #if jogador == jogador_1:
     #    for navios1 in navios.navios_disponiveis_j1:
     #        if tipo == navios1['codigo']:
