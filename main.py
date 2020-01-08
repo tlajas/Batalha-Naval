@@ -2,9 +2,12 @@ import jogadores as jogador
 import tabuleiro as tab
 import colocarnavios as c
 
+jogador_1 = ''
+jogador_2 = ''
+
 def main():
     jogo = jogador.jogadores()
-    nomes = []       
+    nomes = []
     while True:
         line = input()
         if not line:
@@ -24,7 +27,7 @@ def main():
         elif comandos[0] == 'D':
             comandosD(comandos, jogo)
         elif comandos[0] == 'CN':
-            comandosCN(comandos, jogo, jogadores)
+            comandosCN(comandos, jogo)
         elif comandos[0] == 'RN':
             comandosRN(comandos , jogo)
         elif comandos[0] == 'T':
@@ -62,38 +65,21 @@ def comandosLJ(jogo):
     jogador.listar_jogadores(jogo)
 
 def comandosIJ(comandos, jogo):
+    global jogador_1
+    global jogador_2
     jogador_1 = comandos[1]
     jogador_2 = comandos[2]
     jogador.iniciar_jogo(jogo, jogador_1, jogador_2)
-
-
+    
 
 def comandosIC(comandos, jogo):
     pass
 def comandosD(comandos, jogo):
     pass
-def comandosCN(comandos, jogo, jogadores):
-    c.colocar_navios(jogadores)
-    #if comandos[4] == 'A':
-    #    tab.tabuleiro_j1_colunas(0)
-    #elif comandos[4] == 'B':
-    #    tab.tabuleiro_j1_colunas(1)
-    #elif comandos[4] == 'C':
-    #    tab.tabuleiro_j1_colunas(2)
-    #elif comandos[4] == 'D':
-    #    tab.tabuleiro_j1_colunas(3)
-    #elif comandos[4] == 'E':
-    #    tab.tabuleiro_j1_colunas(4)
-    #elif comandos[4] == 'F':
-    #    tab.tabuleiro_j1_colunas(5)
-    #elif comandos[4] == 'G':
-    #    tab.tabuleiro_j1_colunas(6)
-    #elif comandos[4] == 'H':
-    #    tab.tabuleiro_j1_colunas(7)
-    #elif comandos[4] == 'I':
-    #    tab.tabuleiro_j1_colunas(8)
-    #elif comandos[4] == 'J':
-    #    tab.tabuleiro_j1_colunas(9)
+
+def comandosCN(comandos, jogo):
+    pass
+    
 
     
         
