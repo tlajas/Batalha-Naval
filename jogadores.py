@@ -55,8 +55,13 @@ def iniciar_jogo(jogo, nome1, nome2):
             nomes.append(nome1)
         if nome2 in jogador:
             nomes.append(nome2)
-    nomes.sort()
-    print(nomes)
+    if len(nomes) == 2:
+        nomes.sort()
+        print(nomes)
+    elif len(nomes) < 2:
+        print('Não existem jogadores suficientes para iniciar o jogo.') 
+    
+    
     return nomes
 
 
