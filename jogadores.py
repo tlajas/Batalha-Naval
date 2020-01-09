@@ -61,8 +61,6 @@ def iniciar_jogo(jogo, nome1, nome2):
     elif len(nomes) < 2:
         print('Não existem jogadores suficientes para iniciar o jogo.') 
     
-    
-    return nomes
 
 
 
