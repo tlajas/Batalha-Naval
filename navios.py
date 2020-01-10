@@ -33,24 +33,26 @@ navios_disponiveis_j1 = {
       ]
 } 
 
+
+
 navios_disponiveis_j2 = {
     'tipos_de_navios': [
           {
              'L' : {
                    'tamanho': 1,
-                   'quantidade': 4
+                   'quantidade': 1
                    }  
           },
           {
              'S':{
                  'tamanho': 2,
-                 'quantidade': 3
+                 'quantidade': 1
                  }
           },
           {
              'F':{
                  'tamanho': 3,
-                 'quantidade': 2
+                 'quantidade': 1
                  }
           },
           {
