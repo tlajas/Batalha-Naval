@@ -4,6 +4,9 @@ import navios
 jogador_1 = ''
 jogador_2 = ''
 emjogo = False
+navio1 = navios.navios_disponiveis_j1
+navio2 = navios.navios_disponiveis_j2
+tamanho = 0
 
 tabuleiro_j1 = []
 for i in range(10):
@@ -19,7 +22,6 @@ for i in range(10):
     for j in range(10):
         tabuleiro_linha.append(0)
     tabuleiro_j2.append(tabuleiro_linha)
-
 
 
 def tabuleiro_j1_colunas(coluna):
@@ -42,7 +44,7 @@ def comandosRJ(nome, jogo):
         print('Jogador registado com sucesso.')
         return nome_jogador
     
-    
+
 def comandosEJ(comandos, jogo):
     nome_jogador = comandos[1]
     if jogador.esta_na_lista(jogo, nome_jogador):
@@ -76,12 +78,24 @@ def comandosD(comandos, jogo):
     pass
 
 def comandosCN(comandos, player, tipo, fila, coluna, orientacao):
-    pass
+    if jogador_1 == jogador:
+        for n in navio1['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    if chave['quantidade'] == 0:
+                        print('Não existem mais navios deste tipo.')    
+                    elif chave != 0:
+                        
 
 
-        
-
-
+    
+    elif jogador_2 == jogador:
+        for n in navio2['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    if chave['quantidade'] == 0:
+                        print('Não existem mais navios deste tipo.')
+                    elif 
 #def orientacao_j1(comandos, player, tipo):
 #    for navios1 in navios.navios_disponiveis_j1:
 #        if comandos[5] == 'N' and navios_1['codigo'] == tipo:
@@ -117,6 +131,11 @@ def colunaj1(coluna):
     elif coluna == 'J':
         tabuleiro_j1_colunas(9)
 
+def get_tamanho(tipo):
+    for i in navio1['tipo_de_navios']:
+        for k in i[tipo]:
+            tamanho = k['tamanho']
+
 def colunaj2(coluna):
     if coluna == 'A':
         tabuleiro_j2_colunas(0)
@@ -145,8 +164,17 @@ def colocar_norte():
 def colocar_sul():
     pass
 
-def colocar_este():
-    pass
+def colocar_este_j1(linha, tipo):
+    get_tamanho(tipo)
+    r = 0
+    for line in tabuleiro_j1:
+        line[linha]
+            
+
+
+
+def colocar_este_j2():
+        
 
 def colocar_oeste():
     pass
