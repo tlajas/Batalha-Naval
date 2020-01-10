@@ -6,7 +6,6 @@ jogador_2 = ''
 emjogo = False
 navio1 = navios.navios_disponiveis_j1
 navio2 = navios.navios_disponiveis_j2
-tamanho = 0
 
 tabuleiro_j1 = []
 for i in range(10):
@@ -22,16 +21,6 @@ for i in range(10):
     for j in range(10):
         tabuleiro_linha.append(0)
     tabuleiro_j2.append(tabuleiro_linha)
-
-
-def tabuleiro_j1_colunas(coluna):
-    for i in range(0,10):
-        tabuleiro_j1[i][coluna] = 1
-
-
-def tabuleiro_j2_colunas(coluna):
-    for i in range(0,10):
-        tabuleiro_j2[i][coluna] = 1
 
 
 def comandosRJ(nome, jogo):
@@ -71,113 +60,100 @@ def comandosIJ(comandos, jogo):
         print('Existe um jogo em curso.')
     
 
-def comandosIC(comandos, jogo):
-    pass
+def comandosIC():
+    print(tabuleiro_j1)
+    print(tabuleiro_j2)
 
 def comandosD(comandos, jogo):
     pass
 
-def comandosCN(comandos, player, tipo, fila, coluna, orientacao):
-    if jogador_1 == jogador:
+def comandosCN(player, tipo, linha, coluna, orientacao):
+    if jogador.jogadores_em_jogo[0] == player:
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
-                    if chave['quantidade'] == 0:
+                    if n[chave]['quantidade'] == 0:
                         print('Não existem mais navios deste tipo.')    
-                    elif chave != 0:
-                        
-
-
-    
-    elif jogador_2 == jogador:
+                    else:
+                        if orientacao == 'N':
+                            colocar_norte_j1()
+                            n[chave]['quantidade'] -= 1
+                        elif orientacao == 'S':
+                            colocar_sul_j1()
+                            n[chave]['quantidade'] -= 1
+                        elif orientacao == 'E':
+                            colocar_este_j1(linha, coluna, tipo)
+                            n[chave]['quantidade'] -= 1
+                        elif orientacao == 'O':
+                            colocar_oeste_j1(linha, coluna, tipo)
+                            n[chave]['quantidade'] -= 1
+                    
+    elif jogador.jogadores_em_jogo[1] == player:
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
-                    if chave['quantidade'] == 0:
+                    if n[chave]['quantidade'] == 0 :
                         print('Não existem mais navios deste tipo.')
-                    elif 
-#def orientacao_j1(comandos, player, tipo):
-#    for navios1 in navios.navios_disponiveis_j1:
-#        if comandos[5] == 'N' and navios_1['codigo'] == tipo:
-#            
-#
-#            
-#        elif comandos[5] == 'S':
-#            colocar_sul()
-#        elif comandos[5] == 'E':
-#            colocar_este()
-#        elif comandos[5] == 'O':
-#            colocar_oeste()
+                    else:
+                            if orientacao == 'N':
+                                colocar_norte_j2()
+                                n[chave]['quantidade'] -= 1
+                            elif orientacao == 'S':
+                                colocar_sul_j2()
+                                n[chave]['quantidade'] -= 1
+                            elif orientacao == 'E':
+                                colocar_este_j2(linha, coluna, tipo)
+                                n[chave]['quantidade'] -= 1
+                            elif orientacao == 'O':
+                                colocar_oeste_j2(linha, coluna, tipo)
+                                n[chave]['quantidade'] -= 1
 
-def colunaj1(coluna):
-    if coluna == 'A':
-        tabuleiro_j1_colunas(0)
-    elif coluna == 'B':
-        tabuleiro_j1_colunas(1)
-    elif coluna == 'C':
-        tabuleiro_j1_colunas(2)
-    elif coluna == 'D':
-        tabuleiro_j1_colunas(3)
-    elif coluna == 'E':
-        tabuleiro_j1_colunas(4)
-    elif coluna == 'F':
-        tabuleiro_j1_colunas(5)
-    elif coluna == 'G':
-        tabuleiro_j1_colunas(6)
-    elif coluna == 'H':
-        tabuleiro_j1_colunas(7)
-    elif coluna == 'I':
-        tabuleiro_j1_colunas(8)
-    elif coluna == 'J':
-        tabuleiro_j1_colunas(9)
+
 
 def get_tamanho(tipo):
-    for i in navio1['tipo_de_navios']:
-        for k in i[tipo]:
-            tamanho = k['tamanho']
+    for i in navio1['tipos_de_navios']:
+        for chave in i:
+            if chave == tipo:
+                tamanho = i[chave]['tamanho']
+                return tamanho
 
-def colunaj2(coluna):
-    if coluna == 'A':
-        tabuleiro_j2_colunas(0)
-    elif coluna == 'B':
-        tabuleiro_j2_colunas(1)
-    elif coluna == 'C':
-        tabuleiro_j2_colunas(2)
-    elif coluna == 'D':
-        tabuleiro_j2_colunas(3)
-    elif coluna == 'E':
-        tabuleiro_j2_colunas(4)
-    elif coluna == 'F':
-        tabuleiro_j2_colunas(5)
-    elif coluna == 'G':
-        tabuleiro_j2_colunas(6)
-    elif coluna == 'H':
-        tabuleiro_j2_colunas(7)
-    elif coluna == 'I':
-        tabuleiro_j2_colunas(8)
-    elif coluna == 'J':
-        tabuleiro_j2_colunas(9)
 
-def colocar_norte():
+def colocar_norte_j1():
     pass
 
-def colocar_sul():
+def colocar_norte_j2():
     pass
 
-def colocar_este_j1(linha, tipo):
-    get_tamanho(tipo)
-    r = 0
-    for line in tabuleiro_j1:
-        line[linha]
-            
-
-
-
-def colocar_este_j2():
-        
-
-def colocar_oeste():
+def colocar_sul_j1():
     pass
+
+def colocar_sul_j2():
+    pass
+
+def colocar_este_j1(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    for u in range(0, gt):
+        tabuleiro_j1[int(linha)-1][a.index(coluna) + u] = 1
+
+
+def colocar_este_j2(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    for u in range(0, gt):
+        tabuleiro_j2[int(linha)-1][a.index(coluna) + u] = 1
+
+def colocar_oeste_j1(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    for u in range(0, gt):
+        tabuleiro_j1[int(linha)-1][a.index(coluna) - u] = 1
+
+def colocar_oeste_j2(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    for u in range(0, gt):
+        tabuleiro_j2[int(linha)-1][a.index(coluna) - u] = 1
         
 def comandosRN(comandos, jogo):
     pass
@@ -208,16 +184,16 @@ def main():
         elif comandos[0] == 'IJ':
             comandosIJ(comandos, jogo)
         elif comandos[0] == 'IC':
-            comandosIC(comandos, jogo)
+            comandosIC()
         elif comandos[0] == 'D':
             comandosD(comandos, jogo)
         elif comandos[0] == 'CN':
             player = comandos[1]
             tipo = comandos[2]
-            fila = comandos[3]
+            linha = comandos[3]
             coluna = comandos[4]
             orientacao = comandos[5]
-            comandosCN(comandos, player, tipo, fila, coluna, orientacao)
+            comandosCN(player, tipo, linha, coluna, orientacao)
         elif comandos[0] == 'RN':
             comandosRN(comandos , jogo)
         elif comandos[0] == 'T':
