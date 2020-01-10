@@ -1,3 +1,5 @@
+jogadores_em_jogo = []
+
 def jogadores():
     return {
         'jogadores': []
@@ -49,16 +51,15 @@ def esta_na_lista(jogo, nome):
     return True
       
 def iniciar_jogo(jogo, nome1, nome2):
-    nomes = []
     for jogador in jogo['jogadores']:
         if nome1 in jogador:
-            nomes.append(nome1)
+            jogadores_em_jogo.append(nome1)
         if nome2 in jogador:
-            nomes.append(nome2)
-    if len(nomes) == 2:
-        nomes.sort()
-        print(nomes)
-    elif len(nomes) < 2:
+            jogadores_em_jogo.append(nome2)
+    if len(jogadores_em_jogo) == 2:
+        jogadores_em_jogo.sort()
+        print(jogadores_em_jogo)
+    elif len(jogadores_em_jogo) < 2:
         print('Não existem jogadores suficientes para iniciar o jogo.') 
     
 
