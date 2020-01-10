@@ -1,9 +1,9 @@
 import jogadores as jogador
-import colocarnavios as c
 import navios
 
 jogador_1 = ''
 jogador_2 = ''
+emjogo = False
 
 tabuleiro_j1 = []
 for i in range(10):
@@ -26,11 +26,10 @@ def tabuleiro_j1_colunas(coluna):
     for i in range(0,10):
         tabuleiro_j1[i][coluna] = 1
 
+
 def tabuleiro_j2_colunas(coluna):
     for i in range(0,10):
         tabuleiro_j2[i][coluna] = 1
-
-
 
 
 def comandosRJ(nome, jogo):
@@ -52,94 +51,92 @@ def comandosEJ(comandos, jogo):
         jogador.remover_jogadores(jogo, nome_jogador)
         print ('Jogador removido com sucesso.')
 
+
 def comandosLJ(jogo):
     jogador.listar_jogadores(jogo)
 
+
 def comandosIJ(comandos, jogo):
+    global emjogo
     global jogador_1
     global jogador_2
     jogador_1 = comandos[1]
     jogador_2 = comandos[2]
-    jogador.iniciar_jogo(jogo, jogador_1, jogador_2)
+    if not emjogo:
+        jogador.iniciar_jogo(jogo, jogador_1, jogador_2)
+        emjogo = True
+    elif emjogo:
+        print('Existe um jogo em curso.')
     
 
 def comandosIC(comandos, jogo):
     pass
+
 def comandosD(comandos, jogo):
     pass
 
-def comandosCN(comandos, jogador, tipo, fila, coluna, orientacao):
-    if comandos[1] == jogador_1:
-        for navios1 in navios.navios_disponiveis_j1:
-            if tipo == navios1['codigo']:
-                navios1['quantidade'] -= 1
-            elif navios1['quantidade'] == 0:
-                print('Não lhe restam mais navios desse tipo para colocar.')
-        colunaj1(comandos)    
-        
-    
-    else:
-        for navios2 in navios.navios_disponiveis_j2:
-            if tipo == navios2['codigo']:
-                navios2['quantidade'] -= 1
-            elif navios2['quantidade'] == 0:
-                print('Não lhe restam mais navios desse tipo para colocar.')
-        colunaj2(comandos)
+def comandosCN(comandos, player, tipo, fila, coluna, orientacao):
+    pass
+
+
         
 
 
-def orientacao(comandos):
-    if comandos[5] == 'N':
-        colocar_norte()
-    elif comandos[5] == 'S':
-        colocar_sul()
-    elif comandos[5] == 'E':
-        colocar_este()
-    elif comandos[5] == 'O':
-        colocar_oeste()
+#def orientacao_j1(comandos, player, tipo):
+#    for navios1 in navios.navios_disponiveis_j1:
+#        if comandos[5] == 'N' and navios_1['codigo'] == tipo:
+#            
+#
+#            
+#        elif comandos[5] == 'S':
+#            colocar_sul()
+#        elif comandos[5] == 'E':
+#            colocar_este()
+#        elif comandos[5] == 'O':
+#            colocar_oeste()
 
-def colunaj1(comandos):
-    if comandos[4] == 'A':
+def colunaj1(coluna):
+    if coluna == 'A':
         tabuleiro_j1_colunas(0)
-    elif comandos[4] == 'B':
+    elif coluna == 'B':
         tabuleiro_j1_colunas(1)
-    elif comandos[4] == 'C':
+    elif coluna == 'C':
         tabuleiro_j1_colunas(2)
-    elif comandos[4] == 'D':
+    elif coluna == 'D':
         tabuleiro_j1_colunas(3)
-    elif comandos[4] == 'E':
+    elif coluna == 'E':
         tabuleiro_j1_colunas(4)
-    elif comandos[4] == 'F':
+    elif coluna == 'F':
         tabuleiro_j1_colunas(5)
-    elif comandos[4] == 'G':
+    elif coluna == 'G':
         tabuleiro_j1_colunas(6)
-    elif comandos[4] == 'H':
+    elif coluna == 'H':
         tabuleiro_j1_colunas(7)
-    elif comandos[4] == 'I':
+    elif coluna == 'I':
         tabuleiro_j1_colunas(8)
-    elif comandos[4] == 'J':
+    elif coluna == 'J':
         tabuleiro_j1_colunas(9)
 
-def colunaj2(comandos):
-    if comandos[4] == 'A':
+def colunaj2(coluna):
+    if coluna == 'A':
         tabuleiro_j2_colunas(0)
-    elif comandos[4] == 'B':
+    elif coluna == 'B':
         tabuleiro_j2_colunas(1)
-    elif comandos[4] == 'C':
+    elif coluna == 'C':
         tabuleiro_j2_colunas(2)
-    elif comandos[4] == 'D':
+    elif coluna == 'D':
         tabuleiro_j2_colunas(3)
-    elif comandos[4] == 'E':
+    elif coluna == 'E':
         tabuleiro_j2_colunas(4)
-    elif comandos[4] == 'F':
+    elif coluna == 'F':
         tabuleiro_j2_colunas(5)
-    elif comandos[4] == 'G':
+    elif coluna == 'G':
         tabuleiro_j2_colunas(6)
-    elif comandos[4] == 'H':
+    elif coluna == 'H':
         tabuleiro_j2_colunas(7)
-    elif comandos[4] == 'I':
+    elif coluna == 'I':
         tabuleiro_j2_colunas(8)
-    elif comandos[4] == 'J':
+    elif coluna == 'J':
         tabuleiro_j2_colunas(9)
 
 def colocar_norte():
@@ -187,7 +184,12 @@ def main():
         elif comandos[0] == 'D':
             comandosD(comandos, jogo)
         elif comandos[0] == 'CN':
-            comandosCN(comandos, jogo, tipo, fila, coluna, orientacao)
+            player = comandos[1]
+            tipo = comandos[2]
+            fila = comandos[3]
+            coluna = comandos[4]
+            orientacao = comandos[5]
+            comandosCN(comandos, player, tipo, fila, coluna, orientacao)
         elif comandos[0] == 'RN':
             comandosRN(comandos , jogo)
         elif comandos[0] == 'T':
@@ -204,3 +206,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+   # if comandos[1] == jogador_1:
+   #     for navios1 in navios.navios_disponiveis_j1:
+   #         if tipo == navios1['codigo']:
+   #             navios1['quantidade'] -= 1
+   #         elif navios1['quantidade'] == 0:
+   #             print('Não lhe restam mais navios desse tipo para colocar.')
+   #     colunaj1(comandos)    
+   #     
+   # 
+   # else:
+   #     for navios2 in navios.navios_disponiveis_j2:
+   #         if tipo == navios2['codigo']:
+   #             navios2['quantidade'] -= 1
+   #         elif navios2['quantidade'] == 0:
+   #             print('Não lhe restam mais navios desse tipo para colocar.')
+   #     colunaj2(comandos)
