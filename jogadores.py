@@ -1,4 +1,8 @@
+import main
+em_jogo = main.emjogo
+
 jogadores_em_jogo = []
+jogadores_registados = []
 
 def jogadores():
     return {
@@ -14,7 +18,13 @@ def adicionar_jogadores(jogo, nome):
         }
     }
     jogo['jogadores'].append(jogador)
+    jogadores_registados.clear()
+    jog_registados(jogo)    
 
+def jog_registados(jogo):
+    for j in jogo['jogadores']:
+            for key in j:
+                jogadores_registados.append(key)
 
 def tem_jogador(jogo, nome):
     for jogador in jogo['jogadores']:
@@ -50,17 +60,18 @@ def esta_na_lista(jogo, nome):
                 return False
     return True
       
-def iniciar_jogo(jogo, nome1, nome2):
-    for jogador in jogo['jogadores']:
-        if nome1 in jogador:
-            jogadores_em_jogo.append(nome1)
-        if nome2 in jogador:
-            jogadores_em_jogo.append(nome2)
-    if len(jogadores_em_jogo) == 2:
+def iniciar_jogo(nome1, nome2):
+    jogadores_em_jogo.clear()
+    global em_jogo
+    if (nome1 not in jogadores_registados) or (nome2 not in jogadores_registados):
+        print('Jogadores não registados.')
+    else:
+        jogadores_em_jogo.append(nome1)
+        jogadores_em_jogo.append(nome2)
         jogadores_em_jogo.sort()
-        print(jogadores_em_jogo)
-    elif len(jogadores_em_jogo) < 2:
-        print('Não existem jogadores suficientes para iniciar o jogo.') 
+        print('Jogo iniciado entre:', (' e ').join(jogadores_em_jogo))
+        em_jogo = True
+        return em_jogo
     
 
 
