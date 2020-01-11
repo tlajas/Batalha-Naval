@@ -67,7 +67,7 @@ def comandosD(comandos, jogo):
     pass
 
 def comandosCN(player, tipo, linha, coluna, orientacao):
-    if player in jogador.jogadores_em_jogo:
+    if player == jogador.jogadores_em_jogo[0]:
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -87,7 +87,7 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                             colocar_oeste_j1(linha, coluna, tipo)
                             n[chave]['quantidade'] -= 1
                     
-    elif player in jogador.jogadores_em_jogo:
+    elif player == jogador.jogadores_em_jogo[1]:
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -144,8 +144,8 @@ def colocar_este_j2(linha, coluna, tipo):
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     for u in range(0, gt):
-        if ((a.index(coluna) + u) > 10) or (int(linha-1)) > 10 or (int(linha-1)) < 0:
-            print('Posição irregular.')    
+        if a.index(coluna) + u > 10 or int(linha)-1 > 10 or int(linha)-1 < 0:
+            print('Posição irregular.')
         else:
             tabuleiro_j2[int(linha)-1][a.index(coluna) + u] = 1
         
