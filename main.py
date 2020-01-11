@@ -4,6 +4,7 @@ import navios
 jogador_1 = ''
 jogador_2 = ''
 emjogo = False
+emcombate = False
 navio1 = navios.navios_disponiveis_j1
 navio2 = navios.navios_disponiveis_j2
 
@@ -47,16 +48,14 @@ def comandosLJ(jogo):
     jogador.listar_jogadores(jogo)
 
 
-def comandosIJ(comandos, jogo):
-    global emjogo
+def comandosIJ(comandos):
     global jogador_1
     global jogador_2
     jogador_1 = comandos[1]
     jogador_2 = comandos[2]
-    if not emjogo:
-        jogador.iniciar_jogo(jogo, jogador_1, jogador_2)
-        emjogo = True
-    elif emjogo:
+    if not jogador.em_jogo:
+        jogador.iniciar_jogo(jogador_1, jogador_2)
+    elif jogador.em_jogo:
         print('Existe um jogo em curso.')
     
 
@@ -68,7 +67,7 @@ def comandosD(comandos, jogo):
     pass
 
 def comandosCN(player, tipo, linha, coluna, orientacao):
-    if jogador.jogadores_em_jogo[0] == player:
+    if player in jogador.jogadores_em_jogo:
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -88,12 +87,12 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                             colocar_oeste_j1(linha, coluna, tipo)
                             n[chave]['quantidade'] -= 1
                     
-    elif jogador.jogadores_em_jogo[1] == player:
+    elif player in jogador.jogadores_em_jogo:
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
                     if n[chave]['quantidade'] == 0 :
-                        print('Não existem mais navios deste tipo.')
+                        print('Não tem mais navios dessa tipologia disponíveis.')
                     else:
                             if orientacao == 'N':
                                 colocar_norte_j2()
@@ -107,8 +106,12 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                             elif orientacao == 'O':
                                 colocar_oeste_j2(linha, coluna, tipo)
                                 n[chave]['quantidade'] -= 1
-
-
+    
+    elif player not in jogador.jogadores_em_jogo[0] or player not in jogador.jogadores_em_jogo[1]:
+        print('Jogador não participa no jogo em curso.')
+    
+    elif jogador.jogadores_em_jogo == []:
+        print('Não existe jogo em curso.')
 
 def get_tamanho(tipo):
     for i in navio1['tipos_de_navios']:
@@ -141,7 +144,11 @@ def colocar_este_j2(linha, coluna, tipo):
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     for u in range(0, gt):
-        tabuleiro_j2[int(linha)-1][a.index(coluna) + u] = 1
+        if ((a.index(coluna) + u) > 10) or (int(linha-1)) > 10 or (int(linha-1)) < 0:
+            print('Posição irregular.')    
+        else:
+            tabuleiro_j2[int(linha)-1][a.index(coluna) + u] = 1
+        
 
 def colocar_oeste_j1(linha, coluna, tipo):
     gt = get_tamanho(tipo)
@@ -182,7 +189,7 @@ def main():
         elif comandos[0] == 'LJ':
             comandosLJ(jogo)
         elif comandos[0] == 'IJ':
-            comandosIJ(comandos, jogo)
+            comandosIJ(comandos)
         elif comandos[0] == 'IC':
             comandosIC()
         elif comandos[0] == 'D':
