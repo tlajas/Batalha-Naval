@@ -69,7 +69,7 @@ def iniciar_jogo(nome1, nome2):
         jogadores_em_jogo.append(nome1)
         jogadores_em_jogo.append(nome2)
         jogadores_em_jogo.sort()
-        print('Jogo iniciado entre:', (' e ').join(jogadores_em_jogo))
+        print('Jogo iniciado entre', (' e ').join(jogadores_em_jogo))
         em_jogo = True
         return em_jogo
     
