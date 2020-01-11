@@ -75,17 +75,17 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                         print('Não existem mais navios deste tipo.')    
                     else:
                         if orientacao == 'N':
-                            colocar_norte_j1()
-                            n[chave]['quantidade'] -= 1
+                            colocar_norte_j1(linha, coluna, tipo)
+                            
                         elif orientacao == 'S':
-                            colocar_sul_j1()
-                            n[chave]['quantidade'] -= 1
+                            colocar_sul_j1(linha, coluna, tipo)
+                        
                         elif orientacao == 'E':
                             colocar_este_j1(linha, coluna, tipo)
-                            n[chave]['quantidade'] -= 1
+                
                         elif orientacao == 'O':
                             colocar_oeste_j1(linha, coluna, tipo)
-                            n[chave]['quantidade'] -= 1
+                         
                     
     elif player == jogador.jogadores_em_jogo[1]:
         for n in navio2['tipos_de_navios']:
@@ -95,17 +95,14 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                         print('Não tem mais navios dessa tipologia disponíveis.')
                     else:
                             if orientacao == 'N':
-                                colocar_norte_j2()
-                                n[chave]['quantidade'] -= 1
+                                colocar_norte_j2(linha, coluna, tipo)                             
                             elif orientacao == 'S':
-                                colocar_sul_j2()
-                                n[chave]['quantidade'] -= 1
+                                colocar_sul_j2(linha, coluna, tipo)                              
                             elif orientacao == 'E':
-                                colocar_este_j2(linha, coluna, tipo)
-                                n[chave]['quantidade'] -= 1
+                                colocar_este_j2(linha, coluna, tipo)                       
                             elif orientacao == 'O':
                                 colocar_oeste_j2(linha, coluna, tipo)
-                                n[chave]['quantidade'] -= 1
+                           
     
     elif player not in jogador.jogadores_em_jogo[0] or player not in jogador.jogadores_em_jogo[1]:
         print('Jogador não participa no jogo em curso.')
@@ -120,47 +117,127 @@ def get_tamanho(tipo):
                 tamanho = i[chave]['tamanho']
                 return tamanho
 
+def remover_j1(linha, coluna):
+    pass
+    
 
-def colocar_norte_j1():
+def remover_j2(linha, coluna):
     pass
 
-def colocar_norte_j2():
-    pass
 
-def colocar_sul_j1():
-    pass
+def colocar_norte_j1(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 - gt < -1:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j1[int(linha)- 1 - u][a.index(coluna)] = 1
+        for n in navio1['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
 
-def colocar_sul_j2():
-    pass
+def colocar_norte_j2(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 - gt < -1:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j2[int(linha)- 1 - u][a.index(coluna)] = 1
+        for n in navio2['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
+
+def colocar_sul_j1(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 + gt < -1:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j1[int(linha)- 1 + u][a.index(coluna)] = 1
+        for n in navio1['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
+
+def colocar_sul_j2(linha, coluna, tipo):
+    gt = get_tamanho(tipo)
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 + gt < -1:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j2[int(linha)- 1 + u][a.index(coluna)] = 1
+        for n in navio2['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
 
 def colocar_este_j1(linha, coluna, tipo):
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-    for u in range(0, gt):
-        tabuleiro_j1[int(linha)-1][a.index(coluna) + u] = 1
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) + gt > 10:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j1[int(linha)-1][a.index(coluna) + u] = 1
+        for n in navio1['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
 
 
 def colocar_este_j2(linha, coluna, tipo):
     gt = get_tamanho(tipo)
-    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-    for u in range(0, gt):
-        if a.index(coluna) + u > 10 or int(linha)-1 > 10 or int(linha)-1 < 0:
-            print('Posição irregular.')
-        else:
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] 
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) + gt > 10:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
             tabuleiro_j2[int(linha)-1][a.index(coluna) + u] = 1
+        for n in navio2['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
         
 
 def colocar_oeste_j1(linha, coluna, tipo):
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-    for u in range(0, gt):
-        tabuleiro_j1[int(linha)-1][a.index(coluna) - u] = 1
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) - gt > 10:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j1[int(linha)-1][a.index(coluna) - u] = 1
+        for n in navio1['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
 
 def colocar_oeste_j2(linha, coluna, tipo):
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-    for u in range(0, gt):
-        tabuleiro_j2[int(linha)-1][a.index(coluna) - u] = 1
+    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) - gt > 10:
+        print('Posição irregular.') 
+    else:
+        for u in range(0, gt):
+            tabuleiro_j2[int(linha)-1][a.index(coluna) - u] = 1
+        for n in navio2['tipos_de_navios']:
+            for chave in n:
+                if chave == tipo:
+                    n[chave]['quantidade'] -= 1
+        print('Navio colocado com sucesso.')
         
 def comandosRN(comandos, jogo):
     pass
