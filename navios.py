@@ -40,19 +40,19 @@ navios_disponiveis_j2 = {
           {
              'L' : {
                    'tamanho': 1,
-                   'quantidade': 1
+                   'quantidade': 4
                    }  
           },
           {
              'S':{
                  'tamanho': 2,
-                 'quantidade': 1
+                 'quantidade': 3
                  }
           },
           {
              'F':{
                  'tamanho': 3,
-                 'quantidade': 1
+                 'quantidade': 2
                  }
           },
           {
