@@ -1,5 +1,6 @@
 import jogadores as jogador
 import navios
+import pickle
 
 jogador_1 = ''
 jogador_2 = ''
@@ -104,7 +105,7 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                         if orientacao == 'N':
                             colocar_norte_j1(linha, coluna, tipo)                           
                         elif orientacao == 'S':
-                            colocar_sul_j1(linha, coluna, tipo)                        
+                            colocar_sul_j1(linha, coluna, tipo)             
                         elif orientacao == 'E':
                             colocar_este_j1(linha, coluna, tipo)
                         elif orientacao == 'O':
@@ -122,7 +123,7 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                             elif orientacao == 'S':
                                 colocar_sul_j2(linha, coluna, tipo)                              
                             elif orientacao == 'E':
-                                colocar_este_j2(linha, coluna, tipo)                       
+                                colocar_este_j2(linha, coluna, tipo)                
                             elif orientacao == 'O':
                                 colocar_oeste_j2(linha, coluna, tipo)
                            
@@ -132,7 +133,11 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
     elif jogador.jogadores_em_jogo == []:
         print('Não existe jogo em curso.')
 
+def verificar_j1(linha, coluna):
+    pass
+
 def colocar_norte_j1(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 - gt < -1:
@@ -140,6 +145,8 @@ def colocar_norte_j1(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j1[int(linha)- 1 - u][a.index(coluna)] = 1
+            l.append(a[a.index(coluna) + u]+ str(linha - u))
+        navios_para_remover.append(l)
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -147,6 +154,7 @@ def colocar_norte_j1(linha, coluna, tipo):
         print('Navio colocado com sucesso.')
 
 def colocar_norte_j2(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 - gt < -1:
@@ -154,6 +162,8 @@ def colocar_norte_j2(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j2[int(linha)- 1 - u][a.index(coluna)] = 1
+            l.append(a[a.index(coluna) + u]+ str(linha - u))
+        navios_para_remover.append(l)
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -161,6 +171,7 @@ def colocar_norte_j2(linha, coluna, tipo):
         print('Navio colocado com sucesso.')
 
 def colocar_sul_j1(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 + gt < -1:
@@ -168,6 +179,8 @@ def colocar_sul_j1(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j1[int(linha)- 1 + u][a.index(coluna)] = 1
+            l.append(a[a.index(coluna) + u]+ str(linha - u))
+        navios_para_remover.append(l)
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -175,6 +188,7 @@ def colocar_sul_j1(linha, coluna, tipo):
         print('Navio colocado com sucesso.')
 
 def colocar_sul_j2(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or int(linha)-1 + gt < -1:
@@ -182,6 +196,8 @@ def colocar_sul_j2(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j2[int(linha)- 1 + u][a.index(coluna)] = 1
+            l.append(a[a.index(coluna)]+ str(linha + u))
+        navios_para_remover.append(l)
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -189,6 +205,7 @@ def colocar_sul_j2(linha, coluna, tipo):
         print('Navio colocado com sucesso.')
 
 def colocar_este_j1(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) + gt > 10:
@@ -196,6 +213,8 @@ def colocar_este_j1(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j1[int(linha)-1][a.index(coluna) + u] = 1
+            l.append(a[a.index(coluna) + u]+ str(linha))
+        navios_para_remover.append(l)
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -204,7 +223,7 @@ def colocar_este_j1(linha, coluna, tipo):
 
 
 def colocar_este_j2(linha, coluna, tipo):
-    l=[]
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) + gt > 10 or int(linha)-1 > 10 or int(linha)-1 < 0:
@@ -222,6 +241,7 @@ def colocar_este_j2(linha, coluna, tipo):
         
 
 def colocar_oeste_j1(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) - gt > 10:
@@ -229,6 +249,8 @@ def colocar_oeste_j1(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j1[int(linha)-1][a.index(coluna) - u] = 1
+            l.append(a[a.index(coluna) - u]+ str(linha))
+        navios_para_remover.append(l)
         for n in navio1['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -236,6 +258,7 @@ def colocar_oeste_j1(linha, coluna, tipo):
         print('Navio colocado com sucesso.')
 
 def colocar_oeste_j2(linha, coluna, tipo):
+    l = []
     gt = get_tamanho(tipo)
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) - gt > 10:
@@ -243,6 +266,8 @@ def colocar_oeste_j2(linha, coluna, tipo):
     else:
         for u in range(0, gt):
             tabuleiro_j2[int(linha)-1][a.index(coluna) - u] = 1
+            l.append(a[a.index(coluna) - u]+ str(linha))
+        navios_para_remover.append(l)
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
