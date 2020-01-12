@@ -48,9 +48,12 @@ def listar_jogadores(jogo):
         nomes = []
         for jogador in jogo['jogadores']:
             for chave in jogador.keys():
-                nomes.append(chave) 
-        nomes.sort()           
+                nomes.append(chave)
+            nomes.sort()
         print("\n".join(nomes))
+
+
+
 
 
 def esta_na_lista(jogo, nome):
