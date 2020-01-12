@@ -1,4 +1,4 @@
-import main
+import program as main
 em_jogo = main.emjogo
 
 jogadores_em_jogo = []
@@ -37,7 +37,7 @@ def remover_jogadores(jogo, nome):
     for jogador in jogo['jogadores']:
         for chave in jogador:
             if chave == nome:
-                jogador.clear()
+                del jogador[chave]
                 break
 
 
@@ -47,13 +47,12 @@ def listar_jogadores(jogo):
     else:
         nomes = []
         for jogador in jogo['jogadores']:
-            for chave in jogador.keys():
+            for chave in jogador:
                 nomes.append(chave)
             nomes.sort()
-        print("\n".join(nomes))
-
-
-
+            for nom in nomes:
+                if nom in chave:
+                    print(nom, jogador[nom]['jogos'], jogador[nom]['jogos'])
 
 
 def esta_na_lista(jogo, nome):
