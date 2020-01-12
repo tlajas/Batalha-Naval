@@ -58,10 +58,9 @@ def comandosIJ(comandos):
         jogador.iniciar_jogo(jogador_1, jogador_2)
     elif jogador.em_jogo:
         print('Existe um jogo em curso.')
-    
+
 
 def comandosIC():
-    global emjogo
     global emcombate
     for n in navio1['tipos_de_navios']:
         for chave in n:
@@ -72,18 +71,19 @@ def comandosIC():
     if emcombate == False and g == 0 and t == 0 and jogador.em_jogo == True:
         emcombate = True
         print('Combate iniciado.')
-    elif g != 0 and t != 0:
+    elif g != 0 and t != 0 and jogador.em_jogo == True:
         print('Navios não colocados.')
     elif emcombate == True:
         print('Combate já foi iniciado.')
-    elif jogador.em_jogo == False:
+    elif not jogador.em_jogo:
         print('Não existe jogo em curso.')
-    
+
+
 def comandosD():
     print(tabuleiro_j1)
     print(tabuleiro_j2)
     print(navios_para_remover)
-        
+    
 
 def get_tamanho(tipo):
     for i in navio1['tipos_de_navios']:
@@ -91,6 +91,7 @@ def get_tamanho(tipo):
             if chave == tipo:
                 tamanho = i[chave]['tamanho']
                 return tamanho
+
 
 def comandosCN(player, tipo, linha, coluna, orientacao):
     if player == jogador.jogadores_em_jogo[0]:
@@ -108,8 +109,7 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                             colocar_este_j1(linha, coluna, tipo)
                         elif orientacao == 'O':
                             colocar_oeste_j1(linha, coluna, tipo)
-                         
-                    
+                                             
     elif player == jogador.jogadores_em_jogo[1]:
         for n in navio2['tipos_de_navios']:
             for chave in n:
@@ -126,7 +126,6 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                             elif orientacao == 'O':
                                 colocar_oeste_j2(linha, coluna, tipo)
                            
-    
     elif player not in jogador.jogadores_em_jogo[0] or player not in jogador.jogadores_em_jogo[1]:
         print('Jogador não participa no jogo em curso.')
     
