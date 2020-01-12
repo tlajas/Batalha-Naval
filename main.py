@@ -7,6 +7,7 @@ emjogo = False
 emcombate = False
 navio1 = navios.navios_disponiveis_j1
 navio2 = navios.navios_disponiveis_j2
+navios_para_remover = []
 
 tabuleiro_j1 = []
 for i in range(10):
@@ -60,11 +61,36 @@ def comandosIJ(comandos):
     
 
 def comandosIC():
+    global emjogo
+    global emcombate
+    for n in navio1['tipos_de_navios']:
+        for chave in n:
+            t = n[chave]['quantidade']
+    for i in navio2['tipos_de_navios']:
+        for key in i:
+            g = i[key]['quantidade']
+    if emcombate == False and g == 0 and t == 0 and jogador.em_jogo == True:
+        emcombate = True
+        print('Combate iniciado.')
+    elif g != 0 and t != 0:
+        print('Navios não colocados.')
+    elif emcombate == True:
+        print('Combate já foi iniciado.')
+    elif jogador.em_jogo == False:
+        print('Não existe jogo em curso.')
+    
+def comandosD():
     print(tabuleiro_j1)
     print(tabuleiro_j2)
+    print(navios_para_remover)
+        
 
-def comandosD(comandos, jogo):
-    pass
+def get_tamanho(tipo):
+    for i in navio1['tipos_de_navios']:
+        for chave in i:
+            if chave == tipo:
+                tamanho = i[chave]['tamanho']
+                return tamanho
 
 def comandosCN(player, tipo, linha, coluna, orientacao):
     if player == jogador.jogadores_em_jogo[0]:
@@ -75,14 +101,11 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
                         print('Não existem mais navios deste tipo.')    
                     else:
                         if orientacao == 'N':
-                            colocar_norte_j1(linha, coluna, tipo)
-                            
+                            colocar_norte_j1(linha, coluna, tipo)                           
                         elif orientacao == 'S':
-                            colocar_sul_j1(linha, coluna, tipo)
-                        
+                            colocar_sul_j1(linha, coluna, tipo)                        
                         elif orientacao == 'E':
                             colocar_este_j1(linha, coluna, tipo)
-                
                         elif orientacao == 'O':
                             colocar_oeste_j1(linha, coluna, tipo)
                          
@@ -109,21 +132,6 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
     
     elif jogador.jogadores_em_jogo == []:
         print('Não existe jogo em curso.')
-
-def get_tamanho(tipo):
-    for i in navio1['tipos_de_navios']:
-        for chave in i:
-            if chave == tipo:
-                tamanho = i[chave]['tamanho']
-                return tamanho
-
-def remover_j1(linha, coluna):
-    pass
-    
-
-def remover_j2(linha, coluna):
-    pass
-
 
 def colocar_norte_j1(linha, coluna, tipo):
     gt = get_tamanho(tipo)
@@ -197,13 +205,16 @@ def colocar_este_j1(linha, coluna, tipo):
 
 
 def colocar_este_j2(linha, coluna, tipo):
+    l=[]
     gt = get_tamanho(tipo)
-    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] 
-    if a.index(coluna) > 10 or a.index(coluna) < 0 or int(linha)-1 > 10 or int(linha)-1 < 0 or a.index(coluna) + gt > 10:
-        print('Posição irregular.') 
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    if a.index(coluna) + gt > 10 or int(linha)-1 > 10 or int(linha)-1 < 0:
+        print('Posição irregular.')
     else:
         for u in range(0, gt):
             tabuleiro_j2[int(linha)-1][a.index(coluna) + u] = 1
+            l.append(a[a.index(coluna) + u]+ str(linha))
+        navios_para_remover.append(l)
         for n in navio2['tipos_de_navios']:
             for chave in n:
                 if chave == tipo:
@@ -239,9 +250,45 @@ def colocar_oeste_j2(linha, coluna, tipo):
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
         
-def comandosRN(comandos, jogo):
-    pass
-def comandosT(comandos, jogo):
+def comandosRN(player, linha, coluna):
+    if player == jogador.jogadores_em_jogo[0]:
+        remover_j1(linha, coluna)
+    elif player == jogador.jogadores_em_jogo[1]:
+        remover_j2(linha, coluna)
+
+def remover_j1(linha, coluna):
+    col=[]
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    li=[]
+    for n in navios_para_remover:
+        for m in n:
+            if coluna + str(linha) in m:
+                for i in n:
+                    col.append(i[0])
+                    li = (i[1])
+                for c in col:
+                    for num in li:
+                        tabuleiro_j1[int(num) - 1][a.index(c)] = 0
+                navios_para_remover.remove(n)
+
+
+def remover_j2(linha, coluna):
+    col=[]
+    a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    li=[]
+    for n in navios_para_remover:
+        for m in n:
+            if coluna + str(linha) in m:
+                for i in n:
+                    col.append(i[0])
+                    li = (i[1])
+                for c in col:
+                    for num in li:
+                        tabuleiro_j2[int(num) - 1][a.index(c)] = 0
+                navios_para_remover.remove(n)
+
+
+def comandosT(comandos, jogo):  
     pass
 def comandosV(comandos, jogo):
     pass
@@ -270,7 +317,7 @@ def main():
         elif comandos[0] == 'IC':
             comandosIC()
         elif comandos[0] == 'D':
-            comandosD(comandos, jogo)
+            comandosD()
         elif comandos[0] == 'CN':
             player = comandos[1]
             tipo = comandos[2]
@@ -279,7 +326,7 @@ def main():
             orientacao = comandos[5]
             comandosCN(player, tipo, linha, coluna, orientacao)
         elif comandos[0] == 'RN':
-            comandosRN(comandos , jogo)
+            comandosRN(player, linha, coluna)
         elif comandos[0] == 'T':
             comandosT(comandos, jogo)
         elif comandos[0] == 'V':
