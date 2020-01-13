@@ -2,6 +2,8 @@ import jogadores as jogador
 import navios
 import pickle
 
+#-----------------------------------Variáveis do global scope-----------------------------------#
+
 jogador_1 = ''
 jogador_2 = ''
 emjogo = False
@@ -27,6 +29,7 @@ for i in range(10):
         tabuleiro_linha.append(0)
     tabuleiro_j2.append(tabuleiro_linha)
 
+#--------------------------------Funções que definem cada comando--------------------------------#
 
 def comandosRJ(nome, jogo):
     nome_jogador = nome
@@ -82,14 +85,6 @@ def comandosIC():
         print('Não existe jogo em curso.')
 
 
-def get_tamanho(tipo):
-    for i in navio1['tipos_de_navios']:
-        for chave in i:
-            if chave == tipo:
-                tamanho = i[chave]['tamanho']
-                return tamanho
-
-
 def comandosCN(player, tipo, linha, coluna, orientacao):
     if player == jogador.jogadores_em_jogo[0]:
         for n in navio1['tipos_de_navios']:
@@ -130,6 +125,38 @@ def comandosCN(player, tipo, linha, coluna, orientacao):
         print('Não existe jogo em curso.')
 
 
+def comandosRN(player, linha, coluna):
+    if player == jogador.jogadores_em_jogo[0] and jogador.em_jogo == True:
+        if verificar_j1(linha, coluna):
+            print('Não existe navio na posição.')
+        else:
+            remover_j1(linha, coluna)
+            print('Navio removido com sucesso.')
+    elif player == jogador.jogadores_em_jogo[1]:
+        if verificar_j2(linha, coluna):
+            print('Não existe navio na posição.')
+        else:
+            remover_j2(linha, coluna)
+            print('Navio removido com sucesso.')
+    elif player not in jogador.jogadores_em_jogo:
+        print('Jogador não participa no jogo em curso.')
+    elif jogador.em_jogo == False:
+        print('Não existe jogo em curso.')
+
+
+def comandosD(comandos,jogo):
+    pass
+def comandosT(comandos, jogo):  
+    pass
+def comandosV(comandos, jogo):
+    pass
+def comandosG():
+    pass
+def comandosL():
+    pass
+
+#-------------------------------------------Funções auxiliares para colocação de navios-------------------------------------------#
+
 def colocar_norte_j1(linha, coluna, tipo):
     l = []
     gt = get_tamanho(tipo)
@@ -146,6 +173,7 @@ def colocar_norte_j1(linha, coluna, tipo):
                 if chave == tipo:
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
+
 
 def colocar_norte_j2(linha, coluna, tipo):
     l = []
@@ -164,6 +192,7 @@ def colocar_norte_j2(linha, coluna, tipo):
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
 
+
 def colocar_sul_j1(linha, coluna, tipo):
     l = []
     gt = get_tamanho(tipo)
@@ -181,6 +210,7 @@ def colocar_sul_j1(linha, coluna, tipo):
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
 
+
 def colocar_sul_j2(linha, coluna, tipo):
     l = []
     gt = get_tamanho(tipo)
@@ -197,6 +227,7 @@ def colocar_sul_j2(linha, coluna, tipo):
                 if chave == tipo:
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
+
 
 def colocar_este_j1(linha, coluna, tipo):
     l = []
@@ -251,6 +282,7 @@ def colocar_oeste_j1(linha, coluna, tipo):
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
 
+
 def colocar_oeste_j2(linha, coluna, tipo):
     l = []
     gt = get_tamanho(tipo)
@@ -267,7 +299,18 @@ def colocar_oeste_j2(linha, coluna, tipo):
                 if chave == tipo:
                     n[chave]['quantidade'] -= 1
         print('Navio colocado com sucesso.')
-        
+
+#------------------------------Função que obtém tamanh de navio------------------------------#
+
+def get_tamanho(tipo):
+    for i in navio1['tipos_de_navios']:
+        for chave in i:
+            if chave == tipo:
+                tamanho = i[chave]['tamanho']
+                return tamanho
+
+#------------------------------Funções que verificam se existe navio na coordenada selecionada------------------------------#
+
 def verificar_j1(linha, coluna):
     a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     if tabuleiro_j1[int(linha)-1][a.index(coluna)] == 0:
@@ -282,24 +325,7 @@ def verificar_j2(linha, coluna):
     else:
         return False
 
-def comandosRN(player, linha, coluna):
-    if player == jogador.jogadores_em_jogo[0] and jogador.em_jogo == True:
-        if verificar_j1(linha, coluna):
-            print('Não existe navio na posição.')
-        else:
-            remover_j1(linha, coluna)
-            print('Navio removido com sucesso.')
-    elif player == jogador.jogadores_em_jogo[1]:
-        if verificar_j2(linha, coluna):
-            print('Não existe navio na posição.')
-        else:
-            remover_j2(linha, coluna)
-            print('Navio removido com sucesso.')
-    elif player not in jogador.jogadores_em_jogo:
-        print('Jogador não participa no jogo em curso.')
-    elif jogador.em_jogo == False:
-        print('Não existe jogo em curso.')
-       
+#------------------------------Funções que removem os navios------------------------------#
 
 def remover_j1(linha, coluna):
     col=[]
@@ -329,24 +355,18 @@ def remover_j2(linha, coluna):
                     tabuleiro_j2[int(num) - 1][a.index(c)] = 0
             navios_para_remover2.remove(n)
 
-def comandosD(comandos,jogo):
-    pass
-def comandosT(comandos, jogo):  
-    pass
-def comandosV(comandos, jogo):
-    pass
-def comandosG():
-    pass
-def comandosL():
-    pass
+#----------------------------------------------Função main----------------------------------------------#
 
 def main():
+
     jogo = jogador.jogadores()
     nomes = []
+
     while True:
         line = input()
         if not line:
             break
+
         comandos = line.split(' ')
 
         if comandos[0] == 'RJ':
@@ -383,7 +403,6 @@ def main():
         elif comandos[0] == 'L':
             comandosL()
         else:
-            print(nomes)
             print('Instrução inválida')
 
 if __name__ == "__main__":
